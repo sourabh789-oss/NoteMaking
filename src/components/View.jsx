@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import { motion } from 'motion/react';
 import { useLocation } from 'react-router'
  import { useNavigate } from 'react-router';
@@ -7,6 +7,8 @@ const View = ({ }) => {
     const { state } = useLocation();
     const title = state?.title;
     const Notes = state?.Notes;
+    const [edit,isEdit]=useState(false);
+    const [notedata,setnotedata]=useState(Notes);
     const navigate=useNavigate();
     return (
         <motion.div 
@@ -35,9 +37,26 @@ const View = ({ }) => {
             <span className='text-5xl relative bottom-4'>Title:<span className='text-5xl text-cyan-500 font-bold '>{title}</span></span>
 
             <section className='text-base font-medium  '>
-                <textarea type="text" value={Notes} cols={40} rows={10} className='text-black outline-none rounded-md font-medium p-4' readOnly ></textarea>
+                <textarea type="text" 
+                 
+                 value={notedata}
+               onChange={(e)=>{
+                 setnotedata(e.target.value);
+               }}
+                  
+                   readOnly={!edit}
+                
+                
+                 cols={40} rows={10} className={` text-black outline-none rounded-md font-medium p-4 ${!edit?"bg-gray-200 cursor-not-allowed":"bg-white cursor-text"}`}></textarea>
 
             </section>
+
+             <div className='flex justify-between items-center'>
+                 <button onClick={()=>{
+                         isEdit(!edit)
+                 }} className='px-4 rounded-md py-1 bg-green-500 font-bold text-white'>{edit?"Cancel":"Edit"}</button>
+                 <button className='px-4 rounded-md py-1 bg-blue-700 font-bold text-white'>Save</button>
+             </div>
 
         </motion.div>
     )
