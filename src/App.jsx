@@ -153,16 +153,16 @@ const App = () => {
       duration: 1,
       ease: 'linear'
     }}
-    className='min-h-screen bg-right-bottom  bg-[url(https://framerusercontent.com/images/dvcUQX74Mh8wmjKmhIoM2Yli4.png?width=2000&height=2000)]  bg-black text-white'>
+    className='  min-h-screen   bg-black text-white'>
 
 
-    <div className=' sticky top-1  h-fit   z-50 bg-white/10 backdrop-blur-lg shadow-lg rounded-2xl border border-white/20   flex justify-between items-center w-full px-8 py-4 bottom-3   '>
-      <h1 className='text-5xl text-red-300'>Notify</h1>
+    <div className=' sticky top-2  h-fit   z-50 bg-white/10 backdrop-blur-lg shadow-lg rounded-2xl border border-white/20   flex justify-between items-center w-full px-8 py-4 bottom-3   '>
+      <h1 className='text-5xl text-red-300 cursor-pointer' onClick={()=>{navigate('/') }}>Notify</h1>
       {
         user ?
           <div>
             <div className='flex'>
-              <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/user-avatar/png/11.png?d=50x50" className='cursor-pointer' title={user.displayName} alt="User_Profile"></img>
+              <img  src="https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/user-avatar/png/11.png?d=50x50" className='cursor-pointer' title={user.displayName} alt="User_Profile"></img>
               <button className='bg-blue-700  font-normal text-base  border-none rounded-md px-5 py-0 ml-2' onClick={() => { signOutNow() }}>Logout</button>
             </div>
           </div> : <button onClick={() => {
@@ -176,13 +176,29 @@ const App = () => {
     <Routes>
       <Route path='/'
         element={<div>
-          <h1 className='text-center px-6   font-sans text-green-800 text-5xl'>Welcome to NoteMaking </h1>
+         
+           {!user && <div> <section className='relative px-6  top-10 flex flex-wrap flex-row-reverse justify-between items-center'>
+             <div>
+               <img src="https://img.freepik.com/premium-photo/3d-creative-team-brainstorming-vibrant-office-whiteboard-ideas-colorful-postit-notes-digital_980716-839604.jpg?ga=GA1.1.673466269.1724588849&semt=ais_hybrid&w=740&q=80" alt="" className='object-cover rounded-sm ' />
+             </div>
+             <div>
+             <h1 className='text-3xl w-[30rem]  font-serif'><span className='text-red-300 font-semibold font-sans text-5xl'>Notify </span> is an <span className='text-red-300 font-sans '>Authenticated web App </span> where user can Create  private Notes.  Save  Securely here</h1>
+             <h2 className='text-sm font-medium text-green-600'>Your Notes are always  Secure. No One can See Your Notes 😄</h2>
+             </div>
+            </section>
+             <button onClick={() => {
+            signIn()
+          }} className=" bg-blue-600 font-normal cursor-pointer text-base relative bottom-12
+          border-none rounded-md px-4 py-2 left-2 hover:left-6 transition-all">sign in With Google</button>
+            </div>}
 
-
-          <div className='flex justify-between items-center flex-wrap'>
-            {user && <section className='p-6'>
-              <h1 className='text-3xl ml-2 mt-11 mb-2'>Create Your note!</h1>
-              <form onSubmit={createNote}>
+          {user && <h1 className='text-center px-6   font-sans text-green-800 text-5xl'>Welcome to NoteMaking </h1>}
+          <div 
+           
+          className='flex justify-between  items-center flex-wrap'>
+            {user && <section className='p-6  '>
+              <h1 className='text-3xl ml-3 mt-11 mb-2'>Create Your note!</h1>
+              <form onSubmit={createNote} className='ml-2'>
 
                 <div>
                   <input type="text" className=' text-black border-2   outline-none focus:border-2  focus:border-sky-600 rounded-md  py-3 px-5' placeholder='Enter title here...' value={form.title} onChange={(e) =>
@@ -208,7 +224,7 @@ const App = () => {
             </section>
             }
 
-            <section className='mr-44'>
+            <section className='mr-36'>
               {user &&
                 <h2 className='text-5xl text-center  relative bottom-12 text-blue-600'>Your Note</h2>
               }
@@ -226,7 +242,7 @@ const App = () => {
                         >  {d.pinned ? "Unpin ⭐" : "Pin ☆"}</button>
 
                         <button className='mx-4 bg-blue-600 font-normal text-base  border-none rounded-md px-3 py-1' onClick={() => {
-                          navigate('/view', { state: { Notes: d.content, title: d.title } })
+                          navigate('/view', { state: {ID:d.id, Notes: d.content, title: d.title } })
                         }}>View</button>
                         <button className=' mx-4 bg-red-600 font-normal text-base  border-none rounded-md px-3 py-1' onClick={() => { removeNote(d.id) }}>Delete</button>
                         {/* <p>{d.content}</p> */}
@@ -245,9 +261,7 @@ const App = () => {
         </div>} />
       <Route path='/view' element={<View />} />
     </Routes>
-    {/* <Routes>
-     <Route path='/view' element={<View/>}/>
-  </Routes> */}
+    
   </motion.div>
 
 
