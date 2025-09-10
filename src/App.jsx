@@ -8,6 +8,8 @@ import Loader from './components/Loader';
 import { motion } from 'motion/react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router';
 import View from './components/View'
+import LandingPage from './components/LandingPage';
+import Navbar from './components/Navbar';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -18,6 +20,13 @@ const App = () => {
   const navigate = useNavigate();
 
 
+  //Pagination state here 
+  const [CurrentPageState, setCurrentPageState] = useState(1);//intially 1 hi page ha 
+  const NotesperPage = 10;//total notes per page show 
+
+  useEffect(() => {
+    window.scrollTo({ top: 350, behavior: "smooth" });
+  }, [CurrentPageState]);
 
   useEffect(() => {
     if (!user) {
@@ -142,6 +151,17 @@ const App = () => {
   }
 
 
+  //Pagination show logic
+  const indexOfLastNote = CurrentPageState * NotesperPage;
+  const indexofStartNote = indexOfLastNote - NotesperPage;
+
+  const TotalPages = notes != null ? Math.ceil(notes.length / NotesperPage) : 0;//we get here total notes ki length means kitne note create hue ha note we get totalpage show how 
+
+
+
+
+
+
 
   return <motion.div animate={
     {
@@ -155,53 +175,25 @@ const App = () => {
     }}
     className='  min-h-screen   bg-black text-white'>
 
-
-    <div className=' sticky top-2  h-fit   z-50 bg-white/10 backdrop-blur-lg shadow-lg rounded-2xl border border-white/20   flex justify-between items-center w-full px-8 py-4 bottom-3   '>
-      <h1 className='text-5xl text-red-300 cursor-pointer' onClick={()=>{navigate('/') }}>Notify</h1>
-      {
-        user ?
-          <div>
-            <div className='flex'>
-              <img  src="https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/user-avatar/png/11.png?d=50x50" className='cursor-pointer' title={user.displayName} alt="User_Profile"></img>
-              <button className='bg-blue-700  font-normal text-base  border-none rounded-md px-5 py-0 ml-2' onClick={() => { signOutNow() }}>Logout</button>
-            </div>
-          </div> : <button onClick={() => {
-            signIn()
-          }} className=" bg-blue-600 font-normal text-base  border-none rounded-md px-3 py-1">sign in With Google</button>
-      }
-    </div>
-
+    <Navbar signOutNow={signOutNow} signIn={signIn} user={user} />
 
 
     <Routes>
       <Route path='/'
         element={<div>
-         
-           {!user && <div> <section className='relative px-6  top-10 flex flex-wrap flex-row-reverse justify-between items-center'>
-             <div>
-               <img src="https://img.freepik.com/premium-photo/3d-creative-team-brainstorming-vibrant-office-whiteboard-ideas-colorful-postit-notes-digital_980716-839604.jpg?ga=GA1.1.673466269.1724588849&semt=ais_hybrid&w=740&q=80" alt="" className='object-cover rounded-sm ' />
-             </div>
-             <div>
-             <h1 className='text-3xl w-[30rem]  font-serif'><span className='text-red-300 font-semibold font-sans text-5xl'>Notify </span> is an <span className='text-red-300 font-sans '>Authenticated web App </span> where user can Create  private Notes.  Save  Securely here</h1>
-             <h2 className='text-sm font-medium text-green-600'>Your Notes are always  Secure. No One can See Your Notes 😄</h2>
-             </div>
-            </section>
-             <button onClick={() => {
-            signIn()
-          }} className=" bg-blue-600 font-normal cursor-pointer text-base relative bottom-12
-          border-none rounded-md px-4 py-2 left-2 hover:left-6 transition-all">sign in With Google</button>
-            </div>}
+
+          {!user && <LandingPage signIn={signIn} />}
 
           {user && <h1 className='text-center px-6   font-sans text-green-800 text-5xl'>Welcome to NoteMaking </h1>}
-          <div 
-           
-          className='flex justify-between  items-center flex-wrap'>
+          <div
+
+            className='flex justify-center items-center flex-col  gap-7  flex-wrap'>
             {user && <section className='p-6  '>
-              <h1 className='text-3xl ml-3 mt-11 mb-2'>Create Your note!</h1>
-              <form onSubmit={createNote} className='ml-2'>
+              <h1 className='text-4xl ml-3  mb-2'>Create Your note!</h1>
+              <form onSubmit={createNote} className=''>
 
                 <div>
-                  <input type="text" className=' text-black border-2   outline-none focus:border-2  focus:border-sky-600 rounded-md  py-3 px-5' placeholder='Enter title here...' value={form.title} onChange={(e) =>
+                  <input type="text" className=' text-black border-2  w-96  outline-none focus:border-2  focus:border-sky-600 rounded-md  py-4 px-10' placeholder='Enter title here...' value={form.title} onChange={(e) =>
 
                     setForm((f) => ({ ...f, title: e.target.value }))
 
@@ -211,12 +203,12 @@ const App = () => {
                 </div>
 
                 <div className='mt-4'>
-                  <textarea value={form.content} cols={40} rows={10} className='text-black outline-none rounded-md font-medium' placeholder='Write Your note...' onChange={(e) =>
+                  <textarea value={form.content} cols={40} rows={10} className='text-black outline-none w-96 p-4 rounded-md font-medium' placeholder='Write Your note...' onChange={(e) =>
                     setForm((f) => ({ ...f, content: e.target.value }))
                   } ></textarea>
                 </div>
 
-                <button type='submit' className='bg-green-600 font-normal text-base  border-none rounded-md px-3 py-1'>Add Note</button>
+                <button type='submit' className='bg-green-600 font-normal text-base  border-none rounded-md px-5 py-2'>Add Note </button>
 
               </form>
 
@@ -224,14 +216,14 @@ const App = () => {
             </section>
             }
 
-            <section className='mr-36'>
+            <section className=''>
               {user &&
-                <h2 className='text-5xl text-center  relative bottom-12 text-blue-600'>Your Note</h2>
+                <h2 className='text-5xl text-center  relative bottom-12 left-5 my-5 text-blue-600'>Your Note</h2>
               }
               {
                 loading && user ? <p className='text-white'>loading...</p> : <ul>
                   {
-                    notes && notes.map((d) => {
+                    notes && notes.slice(indexofStartNote, indexOfLastNote).map((d) => {
                       return <li className='my-2 flex gap-4 bg-white/10 backdrop-blur-lg shadow-lg  rounded-full border p-4 border-white/20 ' key={d.id}>
                         <p className='text-3xl'>
                           {d.title}</p>
@@ -242,10 +234,10 @@ const App = () => {
                         >  {d.pinned ? "Unpin ⭐" : "Pin ☆"}</button>
 
                         <button className='mx-4 bg-blue-600 font-normal text-base  border-none rounded-md px-3 py-1' onClick={() => {
-                          navigate('/view', { state: {ID:d.id, Notes: d.content, title: d.title } })
+                          navigate('/view', { state: { ID: d.id, Notes: d.content, title: d.title } })
                         }}>View</button>
                         <button className=' mx-4 bg-red-600 font-normal text-base  border-none rounded-md px-3 py-1' onClick={() => { removeNote(d.id) }}>Delete</button>
-                        {/* <p>{d.content}</p> */}
+
 
 
                       </li>
@@ -256,12 +248,44 @@ const App = () => {
 
                 </ul>
               }
+
+              {/* Pagination buttons show */}
+              {
+                user && notes && notes.length > NotesperPage && (
+                  <div className='flex justify-center gap-2 mt-4 flex-wrap'>
+
+                    <button className='bg-gray-700 px-4 py-2 rounded  disabled:opacity-50' disabled={CurrentPageState == 1}
+                      onClick={() => {
+                        setCurrentPageState(prev => prev - 1)
+                      }}>Previous</button>
+
+                    {
+                      Array.from({ length: TotalPages }, (_, i) => i + 1).map((page) => (
+                        <button
+                          key={page} className={`px-4 py-2 rounded ${CurrentPageState == page ? "bg-blue-600" : "bg-gray-700"}`}
+                          onClick={() => { setCurrentPageState(page) }}
+                        >
+                          {page}   </button>
+                      ))
+                    }
+                    <button className='bg-gray-700 px-4 py-2 rounded disabled:opacity-50' disabled={CurrentPageState == TotalPages}
+                      onClick={() => {
+                        setCurrentPageState(prev => prev + 1)
+                      }}
+                    >Next</button>
+                  </div>
+
+
+
+                )
+              }
             </section>
           </div>
         </div>} />
+
       <Route path='/view' element={<View />} />
     </Routes>
-    
+
   </motion.div>
 
 
