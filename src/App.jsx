@@ -184,16 +184,16 @@ const App = () => {
 
           {!user && <LandingPage signIn={signIn} />}
 
-          {user && <h1 className='text-center px-6   font-sans text-green-800 text-5xl'>Welcome to NoteMaking </h1>}
+          {user && <h1 className='userWelcome text-center px-6   font-sans text-green-800 text-5xl'>Welcome to NoteMaking </h1>}
           <div
 
             className='flex justify-center items-center flex-col  gap-7  flex-wrap'>
             {user && <section className='p-6  '>
-              <h1 className='text-4xl ml-3  mb-2'>Create Your note!</h1>
-              <form onSubmit={createNote} className=''>
+              <h1 className='text-4xl userWelcome createnote ml-3  mb-2'>Create Your note!</h1>
+              <form onSubmit={createNote} className='noteform'>
 
                 <div>
-                  <input type="text" className=' text-black border-2  w-96  outline-none focus:border-2  focus:border-sky-600 rounded-md  py-4 px-10' placeholder='Enter title here...' value={form.title} onChange={(e) =>
+                  <input type="text" className=' text-black border-2  w-96  outline-none focus:border-2  focus:border-sky-600 rounded-md  py-4 px-10' autoFocus required placeholder='Enter title here...' value={form.title} onChange={(e) =>
 
                     setForm((f) => ({ ...f, title: e.target.value }))
 
