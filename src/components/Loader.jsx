@@ -20,15 +20,7 @@ const Loader = ({ setLoaders }) => {
   }, [setLoaders])
 
   return (
-    // <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-    //   <div className="loadereffect transition-all  flex items-end gap-[0.3rem]  ">
-    //     <div className="circ animate-bounce "></div>
-    //     <div className="circ  animate-bounce "></div>
-    //     <div className="circ  animate-bounce "></div>
-    //     <div className="circ  animate-bounce "></div>
-    //     <div className="circ  animate-bounce"></div>
-    //   </div>
-    // </div>
+    
 
     <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
       <div className=" transition-all  flex items-end gap-[0.3rem]  ">
