@@ -2,7 +2,7 @@ import React from 'react'
 
 const Navbar = ({signIn,signOutNow,user}) => {
   return (
-   <div className=' sticky top-1  h-fit   z-50 bg-white/10 backdrop-blur-lg shadow-lg rounded-2xl border border-white/20   flex justify-between items-center w-full px-8 py-4   '>
+   <div className='navbar sticky top-1  h-fit   z-50 bg-white/10 backdrop-blur-lg shadow-lg rounded-2xl border border-white/20   flex justify-between items-center w-full px-8 py-4   '>
       <h1 className='text-5xl text-red-300 cursor-pointer' onClick={() => { navigate('/') }}>Notify</h1>
       {
         user ?
