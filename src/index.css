@@ -162,6 +162,8 @@ html,body{
    margin-left: 1rem;
    margin-right: 3rem;
    min-width:90vw;
+  position: relative;
+        top: 2rem;
  }
 
  .view span{
