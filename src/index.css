@@ -83,6 +83,7 @@ html,body{
 }
 
 
+/* CreateNote Component */
 @media only screen and (max-width:426px) {
 
 .userWelcome{
@@ -115,6 +116,23 @@ html,body{
 .noteform button{
    margin-top:1rem;
 }
+
+}
+
+
+/* UserNote Responsive*/
+@media only screen and (max-width:426px) {
+
+   .YourNote h2{
+      left:-4rem;
+      font-size: 2rem;
+   }
+
+   .notesdata{
+      position:relative;
+   }
+
+
 
 }
 
