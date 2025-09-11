@@ -193,7 +193,7 @@ const App = () => {
               <form onSubmit={createNote} className='noteform'>
 
                 <div>
-                  <input type="text" className=' text-black border-2  w-96  outline-none focus:border-2  focus:border-sky-600 rounded-md  py-4 px-10' autoFocus required placeholder='Enter title here...' value={form.title} onChange={(e) =>
+                  <input type="text" className=' text-black border-2  w-96  outline-none focus:border-2  focus:border-sky-600 rounded-md  py-4 px-10'  required placeholder='Enter title here...' value={form.title} onChange={(e) =>
 
                     setForm((f) => ({ ...f, title: e.target.value }))
 

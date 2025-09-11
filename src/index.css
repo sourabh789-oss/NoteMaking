@@ -92,11 +92,11 @@ html,body{
 
 .createnote{
    position: relative;
-   right: 5rem;
+   right: 0rem;
 }
 .noteform{
    position: relative;
-   right: 3rem;
+   right: -2rem;
 }
 
 .noteform input {
@@ -124,8 +124,27 @@ html,body{
 @media only screen and (max-width:426px) {
 
    .YourNote h2{
-      left:-4rem;
-      font-size: 2rem;
+      text-align: center;
+      font-size: 2.3rem;
+      bottom: 2rem;
+   }
+
+   .YourNote li{
+       font-size: 1rem;
+       gap: 0rem;
+      padding-left: 8px;
+      padding-right: 9px;
+
+   }
+
+   .YourNote li p{
+       font-size:1rem;
+   }
+
+   .YourNote li button{
+       padding-left: 0.50rem;
+       padding-right: 0.50rem;
+       margin-right: 0rem;
    }
 
    .notesdata{
@@ -136,3 +155,32 @@ html,body{
 
 }
 
+/* View Component Responsive */
+@media only screen and (max-width:426px) {
+
+ .view{
+   margin-left: 1rem;
+   margin-right: 3rem;
+   min-width:90vw;
+ }
+
+ .view span{
+    font-size: 1.5rem;
+ }
+
+
+ .textpart{
+    position: relative;
+    
+    width: 80vw;
+    height: 15rem;
+ }
+
+ .editandsavebtn{
+   margin-top: 1rem;
+ }
+
+
+
+
+}
