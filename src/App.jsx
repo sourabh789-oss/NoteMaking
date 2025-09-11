@@ -216,12 +216,12 @@ const App = () => {
             </section>
             }
 
-            <section className=''>
+            <section className='YourNote'>
               {user &&
                 <h2 className='text-5xl text-center  relative bottom-12 left-5 my-5 text-blue-600'>Your Note</h2>
               }
               {
-                loading && user ? <p className='text-white'>loading...</p> : <ul>
+                loading && user ? <p className='text-white'>loading...</p> : <ul className='notesdata'>
                   {
                     notes && notes.slice(indexofStartNote, indexOfLastNote).map((d) => {
                       return <li className='my-2 flex gap-4 bg-white/10 backdrop-blur-lg shadow-lg  rounded-full border p-4 border-white/20 ' key={d.id}>
