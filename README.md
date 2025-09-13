@@ -1,7 +1,7 @@
 # NoteMaking - Secure Note Taking Web App
 
 A React-based authenticated note-taking application that allows users to create, manage and securely store their private notes using Firebase.
-
+Live Now:https://notemaking-xxbk.onrender.com/
 ## Features
 
 - 🔐 Google Authentication
